@@ -62,42 +62,44 @@ for (const person of simpsons) {
 document.body.appendChild(divPersonContainer);
 
 
-// // Создание контейнера для всех массивов
-// let divArrayContainer = document.createElement('div');
-//
-// // Перебор каждого объекта в массиве simpsons
-// for (const person of simpsons) {
-//     // Создание массива для текущего объекта
-//     let personArray = [];
-//
-//     // Заполнение массива данными из объекта
-//     personArray.push('name: ' + person.name);
-//     personArray.push('surname: ' + person.surname);
-//     personArray.push('age: ' + person.age);
-//     personArray.push('info: ' + person.info);
-//
-//     // Создание div для текущего массива
-//     let divPersonArray = document.createElement('div');
-//     divPersonArray.classList.add('member-array');
-//
-//     // Добавление элементов массива в div
-//     for (const item of personArray) {
-//         let paragraphItem = document.createElement('p');
-//         paragraphItem.innerText = item;
-//         divPersonArray.appendChild(paragraphItem);
-//     }
-//
-//     // Создание элемента img для картиночки
-//     let imgElement = document.createElement('img');
-//     imgElement.src = person.photo; // Установка атрибута src равным ссылке на изображение
-//     imgElement.alt = person.name; // Установка атрибута alt для картиночки (название персонажа)
-//
-//     // Добавление картиночки в div
-//     divPersonArray.appendChild(imgElement);
-//
-//     // Добавление div с массивом в контейнер
-//     divArrayContainer.appendChild(divPersonArray);
-// }
-//
-// // Добавление контейнера с массивами на страницу
-// document.body.appendChild(divArrayContainer);
+
+
+// Создание контейнера для всех массивов
+let divArrayContainerVersion2 = document.createElement('div');
+
+// Перебор каждого объекта в массиве simpsons
+for (const person of simpsons) {
+    // Создание массива для текущего объекта
+    let personArray = [];
+
+    // Заполнение массива данными из объекта
+    personArray.push('name: ' + person.name);
+    personArray.push('surname: ' + person.surname);
+    personArray.push('age: ' + person.age);
+    personArray.push('info: ' + person.info);
+
+    // Создание div для текущего массива
+    let divPersonArray = document.createElement('div');
+    divPersonArray.classList.add('member-array');
+
+    // Добавление элементов массива в div
+    for (const item of personArray) {
+        let paragraphItem = document.createElement('p');
+        paragraphItem.innerText = item;
+        divPersonArray.appendChild(paragraphItem);
+    }
+
+    // Создание элемента img для картиночки
+    let imgElement = document.createElement('img');
+    imgElement.src = person.photo; // Установка атрибута src равным ссылке на изображение
+    imgElement.alt = person.name; // Установка атрибута alt для картиночки (название персонажа)
+
+    // Добавление картиночки в div
+    divPersonArray.appendChild(imgElement);
+
+    // Добавление div с массивом в контейнер
+    divArrayContainerVersion2.appendChild(divPersonArray);
+}
+
+// Добавление контейнера с массивами на страницу
+document.body.appendChild(divArrayContainerVersion2);
