@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+<h1>Index Page</h1>
+<script>
+    // Создаем новую дату и время посещения
+    let visitDate = new Date().toLocaleString();
+
+    // Получаем текущий массив сессий из локального хранилища
+    let sessions = JSON.parse(localStorage.getItem('sessions')) || [];
+
+    // Добавляем новую сессию в массив
+    sessions.push(visitDate);
+
+    // Сохраняем обновленный массив сессий в локальное хранилище
+    localStorage.setItem('sessions', JSON.stringify(sessions));
+</script>
+</body>
+</html>

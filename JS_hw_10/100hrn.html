@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>100hrn</title>
+</head>
+<body>
+<!--(Додатковачастина для завдання)-->
+<!--*** (подібне було вище, але...будьте уважні в другій частині) створити сторінку з довільним блоком, в середині якого є значення "100грн"-->
+<!--при перезавантаженні сторінки до значаення додається по 10грн, але !!!-->
+<!--зміна ціни відбувається тільки на перезавантаження, які відбулись пізніше ніж 10 секунд після попереднього.-->
+<!--При перезавантаженні, яке відбулось раніше ніж минуло 10 секунд - нічого не відбувається-->
+
+<!-- Контейнер для грошей -->
+<div id="priceBlock">100грн</div>
+
+<script>
+
+    // При загрузке страницы
+    window.onload = function() {
+        let currentPrice = parseInt(localStorage.getItem('currentPrice')) || 100; // Проверяем, если нет сохраненного значения, то устанавливаем 100грн
+        let lastReloadTime = parseInt(localStorage.getItem('lastReloadTime')) || 0; // Проверяем, если нет сохраненного времени, то устанавливаем 0
+        let reloadCount = parseInt(localStorage.getItem('reloadCount')) || 0;
+
+        let currentTime = new Date().getTime();
+        if (lastReloadTime) {
+            let timeDifference = currentTime - lastReloadTime;
+            if (timeDifference >= 10000) {
+                currentPrice += 10; // Добавляем 10грн
+            } else {
+                currentPrice -= 5; // Вычитаем 5грн
+            }
+        }
+
+        // Обновляем значение "priceBlock"
+        updatePrice(currentPrice);
+
+        // Сохраняем текущее значение цены и время последней перезагрузки страницы
+        localStorage.setItem('currentPrice', currentPrice);
+        localStorage.setItem('lastReloadTime', currentTime);
+        localStorage.setItem('reloadCount', reloadCount + 1);
+    }
+
+    // Функция обновления цены
+    function updatePrice(price) {
+        let priceBlock = document.getElementById('priceBlock');
+        priceBlock.textContent = price + 'грн';
+    }
+
+    // // Получаем начальную цену блока - из БЛОКА
+    // // Всегда будет 100 ???
+    // const startBlockPrice = parseFloat(priceBlock.innerText);
+    // console.log('startBlockPrice = ' + startBlockPrice);
+    //
+    // // Получаем текущее время - из КОДА
+    // let currentTime = new Date().getTime();
+    // console.log('currentTime = ' + currentTime);
+    //
+    // // Получаем текущее время последней перезагрузки страницы - из ХРАНИЛИЩА
+    // let lastReloadTime = localStorage.getItem('lastReloadTime');
+    // console.log('lastReloadTime = ' + lastReloadTime);
+    //
+    // // Получаем текущую цену - из ХРАНИЛИЩА
+    // let currentPrice = localStorage.getItem('savedPrice');
+    // console.log('currentPrice = ' + currentPrice);
+    //
+    // // Инициализируем страницу
+    // if (!lastReloadTime || currentTime - lastReloadTime >= 5000) {
+    //     // Если время последней перезагрузки отсутствует или прошло более 10 секунд,
+    //     // Обновляем цену на странице
+    //
+    //     // Добавляем 10грн к текущей цене
+    //     currentPrice += 10;
+    //
+    //     // Отображаем новую цену на странице
+    //     document.getElementById('price').textContent = currentPrice + 'грн';
+    //
+    //     // Обновляем время последней перезагрузки страницы в локальном хранилище
+    //     localStorage.setItem('lastReloadTime', currentTime);
+    //     }
+    //
+    // // Сохраняем в Хранилище новую цену
+    // localStorage.setItem('savedPrice', currentPrice);
+
+
+    // Получаем время последней загрузки из локального хранилища - КОД
+    // let reloadTime = localStorage.getItem('lastReloadTime');
+    // console.log('reloadTime = ' + reloadTime);
+
+    // Устанавливаем время последней загрузки в локальное хранилище
+    // let lastReloadTime = localStorage.setItem('lastReloadTime', getCurrentTime());
+    // console.log('lastReloadTime = ' + lastReloadTime);
+
+
+</script>
+</body>
+</html>

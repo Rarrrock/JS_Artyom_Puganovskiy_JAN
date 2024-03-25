@@ -9,10 +9,12 @@ document.addEventListener('DOMContentLoaded', function () {
     //Назначаем обработчик события на кнопку
     submitButton.addEventListener('click', function (event) {
         event.preventDefault(); // предотвращаем действие по умолчанию для кнопки
+
         // Считываем значение полей из формы
         const name = document.getElementById('name').value;
         const surname = document.getElementById('surname').value;
         const age = document.getElementById('age').value;
+
         // создаем объект с данными из полей
         const person = {
             name: name,
@@ -28,3 +30,24 @@ document.addEventListener('DOMContentLoaded', function () {
                                <p>Age: ${person.age}</p>`;
     })
 })
+
+
+
+// є сторінка, на якій є блок, в якому знаходиться цифра. написати код, який при кожному перезавантажені сторінки буде додавати до неї +1
+
+let counterValue = localStorage.getItem('counter');
+
+// Если значение счетчика не было сохранено, устанавливаем его в 1
+if (!counterValue) {
+    counterValue = 1;
+} else {
+    // Если значение счетчика было сохранено, увеличиваем его на 1
+    counterValue = parseInt(counterValue) + 1;
+}
+
+// Обновляем значение счетчика в локальном хранилище
+localStorage.setItem('counter', counterValue);
+
+// Выводим значение счетчика на страницу
+document.getElementById('counter').innerText = 'Counter: ' + counterValue;
+

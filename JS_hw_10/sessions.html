@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sessions</title>
+</head>
+<body>
+<h1>Sessions Information</h1>
+<div id="sessionInfo"></div>
+<script>
+    // Получаем информацию о сессиях из локального хранилища
+    let sessions = JSON.parse(localStorage.getItem('sessions')) || [];
+
+    // Получаем элемент, куда будем добавлять информацию о сессиях
+    let sessionInfoContainer = document.getElementById('sessionInfo');
+
+    // Проверяем, есть ли информация о сессиях
+    if (sessions.length > 0) {
+        // Создаем DOM структуру для каждой сессии
+        sessions.forEach(session => {
+            // Создаем элемент для отображения информации о сессии
+            let sessionElement = document.createElement('div');
+            sessionElement.classList.add('session');
+
+            // Формируем текст для отображения информации о сессии
+            let sessionInfoText = `Дата и время посещения: ${session}`;
+
+            // устанавливаем текст элемента
+            sessionElement.innerText = sessionInfoText;
+
+            // Добавляем элемент в контейнер
+            sessionInfoContainer.appendChild(sessionElement);
+        });
+    } else {
+        // Если информация о сессиях отсутствует, выводим сообщение
+        sessionInfoContainer.innerText = 'Информация о сессиях отсутствует';
+    }
+</script>
+</body>
+</html>
