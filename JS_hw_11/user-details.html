@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>user-details</title>
+</head>
+<body>
+    <div id="userDetails"></div>
+    <script>
+        // Получение идентификатора пользователя из URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const userId = urlParams.get('id');
+
+        // Получение информации о пользователе по его ID
+        fetch(`http://jsonplaceholder.typicode.com/users/${userId}`)
+            .then(response => response.json())
+            .then(user => {
+                const userDetails = document.getElementById('userDetails');
+
+                // Функция для отображения данных вложенных объектов
+                const displayNestedObject = (obj, parentElement) => {
+                    for (const key in obj) {
+                        if (typeof obj[key] === 'object') {
+                            // Если значение является объектом, вызываем эту же функцию для отображения его содержимого
+                            const nestedDiv = document.createElement('div');
+                            nestedDiv.textContent = `${key}: `;
+                            parentElement.appendChild(nestedDiv);
+                            displayNestedObject(obj[key], nestedDiv);
+                        } else {
+                            // Если значение не является объектом, просто отображаем его
+                            const p = document.createElement('p');
+                            p.textContent = `${key}: ${obj[key]}`;
+                            parentElement.appendChild(p);
+                        }
+                    }
+                };
+
+                // Отображение информации о пользователе
+                for (const key in user) {
+                    if (typeof user[key] === 'object') {
+                        // Если значение является объектом, вызываем функцию отображения для вложенного объекта
+                        const nestedDiv = document.createElement('div');
+                        nestedDiv.textContent = `${key}: `;
+                        userDetails.appendChild(nestedDiv);
+                        displayNestedObject(user[key], nestedDiv);
+                    } else {
+                        // Если значение не является объектом, просто отображаем его
+                        const p = document.createElement('p');
+                        p.textContent = `${key}: ${user[key]}`;
+                        userDetails.appendChild(p);
+                    }
+                }
+            })
+            .catch(error => console.error('Ошибка загрузки информации о пользователе:', error));
+    </script>
+</body>
+</html>
